@@ -1,5 +1,7 @@
 "use client"
 import { useEffect, useState } from 'react';
+import { Mail, BookOpenText, CalendarDays, History as HistoryIcon } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function HistoryPage() {
     const [history, setHistory] = useState([]);
@@ -11,30 +13,56 @@ export default function HistoryPage() {
     }, []);
 
     return (
-        <div>
-            <h1 className="text-2xl font-bold mb-4">История бронирований</h1>
-            <table className="w-full border-collapse border">
-                <thead>
-                <tr className="bg-gray-100">
-                    <th className="border p-2">ID</th>
-                    <th className="border p-2">Пользователь (Email)</th>
-                    <th className="border p-2">Книга</th>
-                    <th className="border p-2">Дата</th>
-                    <th className="border p-2">Статус</th>
-                </tr>
-                </thead>
-                <tbody>
-                {history.map(item => (
-                    <tr key={item.id} className="text-center">
-                        <td className="border p-2">{item.id}</td>
-                        <td className="border p-2">{item.user_email}</td>
-                        <td className="border p-2">{item.book_title}</td>
-                        <td className="border p-2">{new Date(item.booking_date).toLocaleString()}</td>
-                        <td className="border p-2">{item.status}</td>
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+            <h1 className="text-3xl font-extrabold text-gray-900 mb-8 tracking-tight flex items-center gap-3">
+                <HistoryIcon className="text-blue-500"/>История бронирований
+            </h1>
+
+            <div className="overflow-x-auto">
+                <table className="w-full text-sm text-left">
+                    <thead className="text-xs text-gray-400 uppercase bg-gray-50/50 rounded-lg">
+                    <tr>
+                        <th className="px-4 py-3 rounded-l-lg font-medium">ID</th>
+                        <th className="px-4 py-3 font-medium">Пользователь</th>
+                        <th className="px-4 py-3 font-medium">Книга</th>
+                        <th className="px-4 py-3 font-medium">Дата</th>
+                        <th className="px-4 py-3 rounded-r-lg font-medium text-right">Статус</th>
                     </tr>
-                ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100">
+                    <AnimatePresence>
+                        {history.map((item, index) => (
+                            <motion.tr
+                                key={item.id}
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: index * 0.05 }}
+                                className="hover:bg-gray-50/80 transition-colors group"
+                            >
+                                <td className="px-4 py-4 font-mono text-gray-400">#{item.id}</td>
+                                <td className="px-4 py-4">
+                                    <div className="flex items-center gap-2.5 font-medium text-gray-800">
+                                        <Mail size={16} className="text-gray-400 group-hover:text-blue-400 transition-colors" />
+                                        {item.user_email}
+                                    </div>
+                                </td>
+                                <td className="px-4 py-4 font-semibold text-gray-900">{item.book_title}</td>
+                                <td className="px-4 py-4 text-gray-500 whitespace-nowrap">
+                                    {new Date(item.booking_date).toLocaleDateString('ru-RU')}
+                                </td>
+                                <td className="px-4 py-4 text-right">
+                                        <span className={`px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider ${
+                                            item.status === 'active' ? 'bg-green-50 text-green-700' : 'bg-gray-100 text-gray-600'
+                                        }`}>
+                                            {item.status}
+                                        </span>
+                                </td>
+                            </motion.tr>
+                        ))}
+                    </AnimatePresence>
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }

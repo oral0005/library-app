@@ -1,14 +1,17 @@
 import db from '@/lib/db';
 import { NextResponse } from 'next/server';
 
-// Удаление книги
+// src/app/api/books/[id]/route.js
 export async function DELETE(req, { params }) {
-    // В Next.js 15+ params — это Promise
     const { id } = await params;
 
     try {
+        // Сначала удаляем зависимости в истории бронирований
+        await db.query('DELETE FROM bookings WHERE book_id = $1', [id]);
+        // Теперь удаляем саму книгу
         await db.query('DELETE FROM books WHERE id = $1', [id]);
-        return NextResponse.json({ message: 'Книга удалена' });
+
+        return NextResponse.json({ message: 'Книга и её история удалены' });
     } catch (e) {
         console.error(e);
         return NextResponse.json({ error: 'Ошибка удаления' }, { status: 500 });
