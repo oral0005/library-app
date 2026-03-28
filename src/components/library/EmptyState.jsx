@@ -8,10 +8,10 @@ export default function EmptyState({ searchTerm }) {
                 <Search className="h-12 w-12 text-gray-300" />
             </div>
             <h3 className="text-xl font-medium text-gray-900">
-                {searchTerm ? 'Ничего не нашли' : 'Библиотека пуста'}
+                {searchTerm ? 'Ешнәрсе табылмады' : 'Кітаптар әлі жоқ'}
             </h3>
             <p className="text-gray-500 max-w-xs mt-2">
-                {searchTerm ? `По запросу "${searchTerm}" совпадений нет.` : 'Книги появятся здесь совсем скоро.'}
+                {searchTerm ? `Сұраныс бойынша ұқсастықтар жоқ.` : 'Жақын арада кітаптар қосылады!'}
             </p>
         </motion.div>
     );

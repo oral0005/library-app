@@ -8,7 +8,7 @@ export default function SearchBar({ searchTerm, setSearchTerm, isLoading }) {
             </div>
             <input
                 type="text"
-                placeholder="Название или автор"
+                placeholder="Кітап аты немесе авторы"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-11 pr-12 py-3.5 bg-white border-none rounded-2xl shadow-sm ring-1 ring-gray-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all duration-200 text-gray-700 placeholder:text-gray-400"

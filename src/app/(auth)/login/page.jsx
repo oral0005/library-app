@@ -28,7 +28,7 @@ export default function Login() {
             router.push(data.role === 'admin' ? '/admin' : '/');
             router.refresh();
         } else {
-            setError('Неверный email или пароль');
+            setError('Электрондық пошта немесе құпия сөз қате');
             setLoading(false);
         }
     };
@@ -36,7 +36,7 @@ export default function Login() {
     return (
         <div className="flex min-h-screen items-center justify-center -mt-8">
             <div className="w-full max-w-md rounded-xl bg-white p-8 shadow-sm border border-gray-100">
-                <h2 className="mb-8 text-center text-2xl font-semibold text-gray-800">Вход в Библиотеку</h2>
+                <h2 className="mb-8 text-center text-2xl font-semibold text-gray-800">Кітапханаға кіру</h2>
 
                 {error && (
                     <div className="mb-6 rounded-lg bg-red-50 p-3 text-center text-sm text-red-600">
@@ -49,7 +49,7 @@ export default function Login() {
                         type="email"
                         label="Email"
                         name="email"
-                        placeholder="Введите ваш email"
+                        placeholder="Электрондық поштаңызды енгізіңіз"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                         icon={<Mail size={20} />}
@@ -57,9 +57,9 @@ export default function Login() {
                     />
                     <Input
                         type="password"
-                        label="Пароль"
+                        label="Құпия сөз"
                         name="password"
-                        placeholder="Введите ваш пароль"
+                        placeholder="Құпия сөзіңізді енгізіңіз"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                         icon={<Lock size={20} />}
@@ -67,14 +67,14 @@ export default function Login() {
                     />
 
                     <div className="mt-6">
-                        <Button text="Войти" loading={loading} type="submit" />
+                        <Button text="Кіру" loading={loading} type="submit" />
                     </div>
                 </form>
 
                 <div className="mt-6 text-center">
-                    <span className="text-sm text-gray-600">Новенький? </span>
+                    <span className="text-sm text-gray-600">Тіркелмегенсіз бе? </span>
                     <Link href="/register" className="text-sm font-medium text-blue-600 hover:underline">
-                        Зарегистрироваться
+                        Тіркелу
                     </Link>
                 </div>
             </div>

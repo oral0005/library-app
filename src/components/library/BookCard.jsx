@@ -4,7 +4,6 @@ export default function BookCard({ book, onClick }) {
             onClick={onClick}
             className="group flex gap-2 border border-gray-100 p-4 rounded-2xl bg-white shadow-sm hover:shadow-xl transition-all cursor-pointer hover:-translate-y-1 items-center"
         >
-            {/* Левая часть: Фото обложки */}
             <div className="relative h-32 w-24 shrink-0 overflow-hidden rounded-xl bg-gray-50 shadow-inner">
                 {book.image_url ? (
                     <img
@@ -19,7 +18,6 @@ export default function BookCard({ book, onClick }) {
                 )}
             </div>
 
-            {/* Правая часть: Вся информация */}
             <div className="flex flex-1 flex-col self-stretch justify-between py-1">
                 <div>
                     <h3 className="line-clamp-2 font-bold text-gray-900 transition-colors group-hover:text-blue-600 text-md">
@@ -27,18 +25,17 @@ export default function BookCard({ book, onClick }) {
                     </h3>
                     <p className="text-sm font-medium text-gray-500 mb-1">{book.author}</p>
                     <span className="inline-block text-xs text-gray-400 py-0.5 ">
-                        Год издания: {book.year || 'Не указан'}
+                        Шыққан жылы: {book.year || 'Белгісіз'}
                     </span>
                 </div>
 
-                {/* Количество справа снизу */}
-                <div className="flex justify-end mt-2">
+{}                <div className="flex justify-end mt-2">
                     <div className={`px-3 py-1 text-xs font-bold ${
                         book.quantity > 0
                             ? 'text-green-600'
                             : 'text-red-600'
                     }`}>
-                        {book.quantity > 0 ? ` в наличии` : 'Нет в наличии'}
+                        {book.quantity > 0 ? ` қолда бар` : 'қолда жоқ'}
                     </div>
                 </div>
             </div>

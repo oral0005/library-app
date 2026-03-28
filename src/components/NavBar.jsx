@@ -39,7 +39,7 @@ export default function Navbar() {
             router.push('/login');
             router.refresh();
         } catch (error) {
-            console.error("Ошибка при выходе:", error);
+            console.error("Кіруде қателік:", error);
         }
     };
 
@@ -61,13 +61,12 @@ export default function Navbar() {
                                 {user?.role === 'admin' ? <ShieldCheck size={20} /> : <Book size={20} />}
                             </div>
                             <span>
-                                {user?.role === 'admin' ? 'Admin' : 'Library'}
+                                {user?.role === 'admin' ? 'Жұмысшы' : 'Кітапхана'}
                                 <span className="text-blue-600">.</span>
                             </span>
                         </Link>
                     </div>
 
-                    {/* Правая часть */}
                     <div className="flex items-center gap-4">
                         {!loading && (
                             <>
@@ -87,7 +86,7 @@ export default function Navbar() {
                                             className="group flex items-center gap-2 rounded-xl bg-gray-50 px-4 py-2 text-sm font-semibold text-gray-600 transition-all hover:bg-red-50 hover:text-red-600"
                                         >
                                             <LogOut size={18} className="transition-transform group-hover:-translate-x-0.5" />
-                                            <span className="hidden sm:inline">Выйти</span>
+                                            <span className="hidden sm:inline">Шығу</span>
                                         </button>
                                     </div>
                                 ) : (
@@ -95,7 +94,7 @@ export default function Navbar() {
                                         href="/login"
                                         className="flex items-center gap-2 rounded-xl bg-gray-900 px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-gray-200 transition-all hover:bg-gray-800 active:scale-95"
                                     >
-                                        Войти
+                                        Кіру
                                     </Link>
                                 )}
                             </>

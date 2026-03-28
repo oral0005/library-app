@@ -9,7 +9,6 @@ export default function AddBookModal({ isOpen, onClose, onSuccess, book }) {
     const [file, setFile] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
 
-    // Заполнение формы, если передана книга
     useEffect(() => {
         if (book) {
             setFormData({
@@ -39,7 +38,6 @@ export default function AddBookModal({ isOpen, onClose, onSuccess, book }) {
         data.append('quantity', formData.quantity);
         if (file) data.append('image', file);
 
-        // Определяем, создавать новую или редактировать старую
         const url = book ? `/api/books/${book.id}` : '/api/books';
         const method = book ? 'PUT' : 'POST';
 
@@ -48,7 +46,7 @@ export default function AddBookModal({ isOpen, onClose, onSuccess, book }) {
         if (res.ok) {
             onSuccess();
         } else {
-            alert("Ошибка при сохранении книги");
+            alert("Кітапты сақтауда қате кетті");
         }
     };
 
@@ -62,32 +60,31 @@ export default function AddBookModal({ isOpen, onClose, onSuccess, book }) {
                 <div className="p-8">
                     <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
                         <div className="p-2 bg-blue-50 rounded-lg"><Plus className="text-blue-600"/></div>
-                        {book ? 'Редактировать книгу' : 'Новая книга'}
+                        {book ? 'Кітапты өзгерту' : 'Жаңа кітап қосу'}
                     </h2>
                     <form onSubmit={handleSubmit} className="space-y-5">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="space-y-2">
-                                <label className="text-sm font-semibold text-gray-700">Название</label>
-                                <Input value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} placeholder="Напр: Мастер и Маргарита" required />
+                                <label className="text-sm font-semibold text-gray-700">Кітап аты</label>
+                                <Input value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} placeholder="Мысалы: Мастер и Маргарита" required />
                             </div>
                             <div className="space-y-2">
-                                <label className="text-sm font-semibold text-gray-700">Автор</label>
+                                <label className="text-sm font-semibold text-gray-700">Авторы</label>
                                 <Input value={formData.author} onChange={e => setFormData({...formData, author: e.target.value})} placeholder="М. Булгаков" required />
                             </div>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="space-y-2">
-                                <label className="text-sm font-semibold text-gray-700 flex items-center gap-2"><Calendar size={14}/> Год издания</label>
+                                <label className="text-sm font-semibold text-gray-700 flex items-center gap-2"><Calendar size={14}/> Шыққан жылы</label>
                                 <Input type="number" value={formData.year} onChange={e => setFormData({...formData, year: e.target.value})} placeholder="2024" />
                             </div>
                             <div className="space-y-2">
-                                <label className="text-sm font-semibold text-gray-700">Количество</label>
+                                <label className="text-sm font-semibold text-gray-700">Саны</label>
                                 <Input type="number" value={formData.quantity} onChange={e => setFormData({...formData, quantity: parseInt(e.target.value) || 0})} min="1" required />
                             </div>
                         </div>
-                        {/* Загрузка фото */}
                         <div className="space-y-2">
-                            <label className="text-sm font-semibold text-gray-700 flex items-center gap-2"><ImageIcon size={14}/> Обложка книги</label>
+                            <label className="text-sm font-semibold text-gray-700 flex items-center gap-2"><ImageIcon size={14}/> Кітаптың беті</label>
                             <div className="relative border-2 border-dashed border-gray-200 rounded-xl p-4 hover:border-blue-400 transition-colors bg-gray-50/50 min-h-[120px] flex flex-col items-center justify-center">
                                 <input type="file" accept="image/*" className="absolute inset-0 opacity-0 cursor-pointer z-10 w-full h-full"
                                        onChange={e => {
@@ -97,28 +94,28 @@ export default function AddBookModal({ isOpen, onClose, onSuccess, book }) {
                                                const reader = new FileReader();
                                                reader.onloadend = () => setImagePreview(reader.result);
                                                reader.readAsDataURL(selectedFile);
-                                           } else setImagePreview(book?.image_url || null); // Возврат старой картинки при отмене
+                                           } else setImagePreview(book?.image_url || null);
                                        }}
                                 />
                                 {imagePreview ? (
                                     <div className="flex flex-col items-center gap-3">
                                         <img src={imagePreview} alt="Превью" className="h-32 w-auto object-cover rounded-lg shadow-sm" />
-                                        <span className="text-sm text-gray-500 truncate px-2">{file?.name || 'Текущая обложка'}</span>
+                                        <span className="text-sm text-gray-500 truncate px-2">{file?.name || 'Қазіргі беті'}</span>
                                     </div>
                                 ) : (
                                     <div className="flex items-center gap-3 text-gray-500">
                                         <div className="bg-white p-2 rounded-lg shadow-sm"><ImageIcon className="text-blue-500" size={20}/></div>
-                                        <span className="text-sm">Нажмите или перетащите файл</span>
+                                        <span className="text-sm">Басыңыз немесе үстіне алып тастаңыз</span>
                                     </div>
                                 )}
                             </div>
                         </div>
                         <div className="space-y-2">
-                            <label className="text-sm font-semibold text-gray-700 flex items-center gap-2"><AlignLeft size={14}/> Описание</label>
-                            <textarea className="w-full p-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none min-h-[120px]" value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} placeholder="Краткое содержание..." />
+                            <label className="text-sm font-semibold text-gray-700 flex items-center gap-2"><AlignLeft size={14}/> Түсініктеме</label>
+                            <textarea className="w-full p-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none min-h-[120px]" value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} placeholder="Қысқаша түсініктеме" />
                         </div>
                         <Button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg w-full py-3 rounded-xl font-bold">
-                            {book ? 'Сохранить изменения' : 'Добавить в коллекцию'}
+                            {book ? 'Өзгерістерді сақтау' : 'Кітапты қосу'}
                         </Button>
                     </form>
                 </div>

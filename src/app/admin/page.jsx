@@ -18,7 +18,7 @@ export default function AdminDashboard() {
     useEffect(() => { fetchBooks(); }, []);
 
     const handleDelete = async (id) => {
-        if (!confirm('Удалить книгу?')) return;
+        if (!confirm('Кітапты өшіру керек пе?')) return;
         const res = await fetch(`/api/books/${id}`, { method: 'DELETE' });
         if (res.ok) setBooks(books.filter(b => b.id !== id));
     };
@@ -46,7 +46,7 @@ export default function AdminDashboard() {
 
     return (
         <div className="mb-12 space-y-6">
-            <h1 className="text-4xl font-bold text-gray-900 tracking-tight">Инвентарь</h1>
+            <h1 className="text-4xl font-bold text-gray-900 tracking-tight">Қор</h1>
             <div className="space-y-4">
                 <AnimatePresence mode="popLayout">
                     {books.map(book => (
@@ -55,7 +55,7 @@ export default function AdminDashboard() {
                             book={book}
                             onUpdateQuantity={handleUpdateQuantity}
                             onDelete={handleDelete}
-                            onEdit={openEditModal} // Передаем функцию редактирования
+                            onEdit={openEditModal}
                         />
                     ))}
                 </AnimatePresence>

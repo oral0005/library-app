@@ -15,7 +15,7 @@ export default function HistoryPage() {
     return (
         <div className="bg-white p-6 mb-12 space-y-6 rounded-2xl shadow-sm border border-gray-100">
             <h1 className="text-4xl font-bold text-gray-900 tracking-tigh flex items-center gap-3">
-                <HistoryIcon className="text-blue-500"/>История бронирований
+                <HistoryIcon className="text-blue-500"/>Брондау тарихы
             </h1>
 
             <div className="overflow-x-auto">
@@ -23,10 +23,10 @@ export default function HistoryPage() {
                     <thead className="text-xs text-gray-400 uppercase bg-gray-50/50 rounded-lg">
                     <tr>
                         <th className="px-4 py-3 rounded-l-lg font-medium">ID</th>
-                        <th className="px-4 py-3 font-medium">Пользователь</th>
-                        <th className="px-4 py-3 font-medium">Книга</th>
-                        <th className="px-4 py-3 font-medium">Дата</th>
-                        <th className="px-4 py-3 rounded-r-lg font-medium text-right">Статус</th>
+                        <th className="px-4 py-3 font-medium">Email</th>
+                        <th className="px-4 py-3 font-medium">Кітап</th>
+                        <th className="px-4 py-3 font-medium">Күні</th>
+                        <th className="px-4 py-3 rounded-r-lg font-medium text-right">Күйі</th>
                     </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100">
@@ -51,10 +51,8 @@ export default function HistoryPage() {
                                     {new Date(item.booking_date).toLocaleDateString('ru-RU')}
                                 </td>
                                 <td className="px-4 py-4 text-right">
-                                        <span className={`px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider ${
-                                            item.status === 'active' ? 'bg-green-50 text-green-700' : 'bg-gray-100 text-gray-600'
-                                        }`}>
-                                            {item.status}
+                                        <span className={`px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-green-50 text-green-700`}>
+                                            Қабылданды
                                         </span>
                                 </td>
                             </motion.tr>

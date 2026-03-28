@@ -22,10 +22,10 @@ export default function Register() {
         });
 
         if (res.ok) {
-            alert('Аккаунт создан! Теперь войдите.');
+            alert('Аккаунт жасалды! Енді жүйеге кіріңіз.');
             router.push('/login');
         } else {
-            alert('Произошла ошибка при регистрации');
+            alert('Тіркелу кезінде қате кетті');
             setLoading(false);
         }
     };
@@ -33,14 +33,14 @@ export default function Register() {
     return (
         <div className="flex min-h-screen items-center justify-center  -mt-8">
             <div className="w-full max-w-md rounded-xl bg-white p-8 shadow-sm border border-gray-100">
-                <h2 className="mb-8 text-center text-2xl font-semibold text-gray-800">Регистрация</h2>
+                <h2 className="mb-8 text-center text-2xl font-semibold text-gray-800">Тіркелу</h2>
 
                 <form onSubmit={handleRegister}>
                     <Input
                         type="email"
                         label="Email"
                         name="email"
-                        placeholder="Введите ваш email"
+                        placeholder="Электрондық поштаңызды енгізіңіз"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                         icon={<Mail size={20} />}
@@ -48,9 +48,9 @@ export default function Register() {
                     />
                     <Input
                         type="password"
-                        label="Пароль"
+                        label="Құпия сөз"
                         name="password"
-                        placeholder="Придумайте пароль"
+                        placeholder="Құпия сөз ойлап табыңыз"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                         icon={<Lock size={20} />}
@@ -58,14 +58,14 @@ export default function Register() {
                     />
 
                     <div className="mt-6">
-                        <Button text="Создать аккаунт" loading={loading} type="submit" />
+                        <Button text="Тіркелу" loading={loading} type="submit" />
                     </div>
                 </form>
 
                 <div className="mt-6 text-center">
-                    <span className="text-sm text-gray-600">Уже есть аккаунт? </span>
+                    <span className="text-sm text-gray-600">Аккаунтыңыз бар ма? </span>
                     <Link href="/login" className="text-sm font-medium text-blue-600 hover:underline">
-                        Войти
+                        Кіру
                     </Link>
                 </div>
             </div>

@@ -34,18 +34,18 @@ export default function Home() {
     }, [searchTerm]);
 
     const handleBooking = async (book) => {
-        if (!user) return alert("Пожалуйста, войдите в систему");
+        if (!user) return alert("Жүйеге кіріңіз немесе тіркеліңіз");
         const res = await fetch('/api/bookings', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ user_id: user.id, book_id: book.id }),
         });
         if (res.ok) {
-            alert("Книга забронирована!");
+            alert("Кітап брондалды!");
             setSelectedBook(null);
             loadData(searchTerm);
         } else {
-            alert((await res.json()).error || "Ошибка при бронировании");
+            alert((await res.json()).error || "Брондау кезінде қате кетті");
         }
     };
 
@@ -53,8 +53,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto p-6 min-h-screen bg-gray-50/50">
             <header className="mb-12 flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
-                    <h1 className="text-4xl font-bold text-gray-900 tracking-tight">Библиотека</h1>
-                    <p className="text-gray-500 mt-1">Найдите свою следующую историю</p>
+                    <h1 className="text-4xl font-bold text-gray-900 tracking-tight">Кітапхана</h1>
+                    <p className="text-gray-500 mt-1">Келесі кітабыңызды табыңыз</p>
                 </div>
                 <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} isLoading={isLoading} />
             </header>

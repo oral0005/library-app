@@ -7,8 +7,8 @@ export default function AdminLayout({ children }) {
     return (
         <div className="max-w-7xl mx-auto p-6">
             <div className="mb-8 flex gap-6 border-b border-gray-100 pb-px relative">
-                <AdminTab href="/admin">Управление книгами</AdminTab>
-                <AdminTab href="/admin/history">История бронирований</AdminTab>
+                <AdminTab href="/admin">Кітаптарды басқару</AdminTab>
+                <AdminTab href="/admin/history">Брондау тарихы</AdminTab>
             </div>
             <motion.main
                 initial={{ opacity: 0, y: 10 }}

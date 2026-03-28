@@ -16,7 +16,6 @@ export default function BookModal({ book, user, onClose, onBook }) {
 
                 <div className="p-6">
                     <div className="flex flex-col md:flex-row gap-6">
-                        {/* Обложка */}
                         <div className="w-full md:w-40 shrink-0 h-56 rounded-lg overflow-hidden shadow-md bg-gray-50">
                             {book.image_url ? (
                                 <img
@@ -36,16 +35,16 @@ export default function BookModal({ book, user, onClose, onBook }) {
                             <h2 className="text-2xl font-bold text-gray-900 leading-tight">{book.title}</h2>
                             <p className="text-lg text-gray-600 font-medium mb-2">{book.author}</p>
                             <div className="inline-block py-1 text-xs text-gray-400 mt-1">
-                                Год издания: {book.year || 'Не указан'}
+                                Шыққан жылы: {book.year || 'Белгісіз'}
                             </div>
 
                             <p className="text-gray-700 text-sm leading-relaxed mb-4">
-                                {book.description || 'Описание отсутствует.'}
+                                {book.description || 'Түсініктемесі жоқ'}
                             </p>
 
                             <p className="text-sm font-semibold">
-                                Осталось: <span className={book.quantity > 0 ? "text-green-600" : "text-red-600"}>
-                                    {book.quantity} шт.
+                                Қалды: <span className={book.quantity > 0 ? "text-green-600" : "text-red-600"}>
+                                    {book.quantity} дана
                                 </span>
                             </p>
                         </div>
@@ -61,11 +60,11 @@ export default function BookModal({ book, user, onClose, onBook }) {
                                     : "bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-200 active:scale-95"
                             }`}
                         >
-                            {book.quantity < 1 ? "Нет в наличии" : "Забронировать книгу"}
+                            {book.quantity < 1 ? "Кітап қалмаған" : "Кітапты брондау"}
                         </Button>
                         {!user && (
                             <p className="text-center text-xs text-red-500 mt-2">
-                                Нужно войти в аккаунт, чтобы забронировать
+                                Брондау үшін жүйеге кіріңіз немесе тіркеліңіз.
                             </p>
                         )}
                     </div>
