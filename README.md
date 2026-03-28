@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Әрине\! Сенің мәтініңді негізге ала отырып, кез келген GitHub репозиторийіне сәйкес келетін, кәсіби безендірілген `README.md` файлын дайындадым.
 
-## Getting Started
+Төмендегі кодты толығымен көшіріп (оң жақ жоғарғы бұрыштағы **Copy** батырмасымен), файлыңа қоя салсаң болады:
 
-First, run the development server:
+````markdown
+# 📚 Library Management System
+
+Заманауи технологиялар көмегімен жасалған, кітаптарды іздеуге, броньдауға және басқаруға арналған онлайн платформа.
+
+---
+
+## 🌟 Жобаның негізгі идеясы
+
+Сайттың басты мақсаты — кітапхана жұмысын автоматтандыру. Пайдаланушылар кітаптар каталогын онлайн бақылап, қажетті басылымдарды лезде броньдай алады.
+
+### 🔍 Негізгі мүмкіндіктер
+
+* **Кітаптарды іздеу:** Атауы немесе авторы бойынша жылдам іздеу (мысалы: "Abai").
+* **Толық ақпарат:** Әр кітаптың сипаттамасы, шыққан жылы және қазіргі статусы (бос/бос емес).
+* **Броньдау жүйесі:** Қолжетімді кітаптарға бір батырмамен тапсырыс беру.
+* **Жеке кабинет:** Пайдаланушының өзі алған кітаптарын қадағалау мүмкіндігі.
+* **Админ панель:** Кітаптар базасын басқару (қосу/өшіру) және оқырмандардың белсенділігін бақылау.
+
+---
+
+## 🛠 Технологиялық стек
+
+| Технология | Қолданысы |
+| :--- | :--- |
+| **Next.js** | Frontend және Backend (API Routes) |
+| **PostgreSQL** | Деректер базасы |
+| **Node.js** | Орындау ортасы |
+| **JWT** | Авторизация және қауіпсіздік |
+
+---
+
+## ⚙️ Орнату және іске қосу нұсқаулығы
+
+Жобаны локальді компьютерде іске қосу үшін төмендегі қадамдарды орындаңыз:
+
+### 1. Репозиторийді көшіру (Clone)
+```bash
+git clone [https://github.com/your-username/library-project.git](https://github.com/your-username/library-project.git)
+cd library-project
+````
+
+### 2\. Айнымалыларды баптау (.env)
+
+Жобаның түбірлік каталогында `.env` файлын ашып, келесі деректерді енгізіңіз:
+
+```env
+DB_USER=postgres
+DB_PASSWORD=your_password_here
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=library_db
+JWT_SECRET=super_secret_key_123
+```
+
+> **Маңызды:** `DB_PASSWORD` бөлігіне өзіңіздің PostgreSQL пароліңізді жазуды ұмытпаңыз.
+
+### 3\. Пакеттерді орнату
+
+```bash
+npm install
+```
+
+### 4\. Деректер базасын толтыру (Seed)
+
+Базаға алғашқы мәліметтерді (админ және кітаптар жинағын) қосу үшін:
+
+```bash
+# Админ аккаунтын жасау
+node create-admin.js
+
+# Кітаптар тізімін қосу
+node seed-books.js
+```
+
+**Админнің әдепкі деректері:**
+
+* **Email:** `admin@gmail.com`
+* **Password:** `admin123`
+
+### 5\. Жобаны іске қосу
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Енді браузерден [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000) сілтемесіне өтіңіз.
 
-You can start editing the page by modifying `app/page.jsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+-----
