@@ -18,7 +18,8 @@ export async function middleware(request) {
     }
 
     if (!token) {
-        if (pathname.startsWith('/admin') || pathname.startsWith('/books')) {
+        // Добавлена защита для /history
+        if (pathname.startsWith('/admin') || pathname.startsWith('/books') || pathname.startsWith('/history')) {
             return NextResponse.redirect(new URL('/login', request.url));
         }
         return NextResponse.next();

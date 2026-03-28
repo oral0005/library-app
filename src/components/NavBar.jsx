@@ -2,7 +2,8 @@
 import Link from 'next/link';
 import { useEffect, useState, useCallback } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { LogOut, Book, ShieldCheck, User as UserIcon } from 'lucide-react';
+// Добавлена иконка History
+import { LogOut, Book, ShieldCheck, User as UserIcon, History } from 'lucide-react';
 
 export default function Navbar() {
     const [user, setUser] = useState(null);
@@ -72,14 +73,26 @@ export default function Navbar() {
                             <>
                                 {user ? (
                                     <div className="flex items-center gap-5">
-                                        <div className="hidden flex-col items-end sm:flex">
+
+                                        {/* Кнопка "Тарихым" для обычных пользователей */}
+                                        {user.role !== 'admin' && (
+                                            <Link
+                                                href="/history"
+                                                className="flex items-center gap-1.5 text-sm font-semibold text-gray-600 hover:text-blue-600 transition-colors px-2 py-1"
+                                            >
+                                                <History size={18} />
+                                                <span className="hidden sm:inline">Тарихым</span>
+                                            </Link>
+                                        )}
+
+                                        <div className="hidden flex-col items-end sm:flex pl-2 border-l border-gray-100">
                                             <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600">
                                                 {user.role}
                                             </span>
                                             <span className="text-sm font-medium text-gray-700">{user.email}</span>
                                         </div>
 
-                                        <div className="h-8 w-px bg-gray-100" />
+                                        <div className="h-8 w-px bg-gray-100 hidden sm:block" />
 
                                         <button
                                             onClick={handleLogout}
