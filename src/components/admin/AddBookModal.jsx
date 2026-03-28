@@ -1,13 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, X, Image as ImageIcon, AlignLeft, Calendar } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 
-export default function AddBookModal({ isOpen, onClose, onSuccess }) {
+export default function AddBookModal({ isOpen, onClose, onSuccess, book }) {
     const [formData, setFormData] = useState({ title: '', author: '', description: '', year: '', quantity: 1 });
     const [file, setFile] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
+
+    // Заполнение формы, если передана книга
+    useEffect(() => {
+        if (book) {
+            setFormData({
+                title: book.title || '',
+                author: book.author || '',
+                description: book.description || '',
+                year: book.year || '',
+                quantity: book.quantity || 1
+            });
+            setImagePreview(book.image_url || null);
+        } else {
+            setFormData({ title: '', author: '', description: '', year: '', quantity: 1 });
+            setImagePreview(null);
+        }
+        setFile(null);
+    }, [book, isOpen]);
 
     if (!isOpen) return null;
 
@@ -21,13 +39,14 @@ export default function AddBookModal({ isOpen, onClose, onSuccess }) {
         data.append('quantity', formData.quantity);
         if (file) data.append('image', file);
 
-        const res = await fetch('/api/books', { method: 'POST', body: data });
+        // Определяем, создавать новую или редактировать старую
+        const url = book ? `/api/books/${book.id}` : '/api/books';
+        const method = book ? 'PUT' : 'POST';
+
+        const res = await fetch(url, { method, body: data });
 
         if (res.ok) {
-            setFormData({ title: '', author: '', description: '', year: '', quantity: 1 });
-            setFile(null);
-            setImagePreview(null);
-            onSuccess(); // Закрывает модалку и обновляет список в родителе
+            onSuccess();
         } else {
             alert("Ошибка при сохранении книги");
         }
@@ -43,10 +62,9 @@ export default function AddBookModal({ isOpen, onClose, onSuccess }) {
                 <div className="p-8">
                     <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
                         <div className="p-2 bg-blue-50 rounded-lg"><Plus className="text-blue-600"/></div>
-                        Новая книга
+                        {book ? 'Редактировать книгу' : 'Новая книга'}
                     </h2>
                     <form onSubmit={handleSubmit} className="space-y-5">
-                        {/* Поля формы: Название, Автор, Год, Количество */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <label className="text-sm font-semibold text-gray-700">Название</label>
@@ -79,13 +97,13 @@ export default function AddBookModal({ isOpen, onClose, onSuccess }) {
                                                const reader = new FileReader();
                                                reader.onloadend = () => setImagePreview(reader.result);
                                                reader.readAsDataURL(selectedFile);
-                                           } else setImagePreview(null);
+                                           } else setImagePreview(book?.image_url || null); // Возврат старой картинки при отмене
                                        }}
                                 />
                                 {imagePreview ? (
                                     <div className="flex flex-col items-center gap-3">
                                         <img src={imagePreview} alt="Превью" className="h-32 w-auto object-cover rounded-lg shadow-sm" />
-                                        <span className="text-sm text-gray-500 truncate px-2">{file?.name}</span>
+                                        <span className="text-sm text-gray-500 truncate px-2">{file?.name || 'Текущая обложка'}</span>
                                     </div>
                                 ) : (
                                     <div className="flex items-center gap-3 text-gray-500">
@@ -99,7 +117,9 @@ export default function AddBookModal({ isOpen, onClose, onSuccess }) {
                             <label className="text-sm font-semibold text-gray-700 flex items-center gap-2"><AlignLeft size={14}/> Описание</label>
                             <textarea className="w-full p-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none min-h-[120px]" value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} placeholder="Краткое содержание..." />
                         </div>
-                        <Button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg w-full py-3 rounded-xl font-bold">Добавить в коллекцию</Button>
+                        <Button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg w-full py-3 rounded-xl font-bold">
+                            {book ? 'Сохранить изменения' : 'Добавить в коллекцию'}
+                        </Button>
                     </form>
                 </div>
             </motion.div>

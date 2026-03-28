@@ -8,6 +8,7 @@ import AddBookModal from '@/components/admin/AddBookModal';
 export default function AdminDashboard() {
     const [books, setBooks] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [editingBook, setEditingBook] = useState(null); // Новое состояние
 
     const fetchBooks = async () => {
         const res = await fetch('/api/books');
@@ -32,20 +33,37 @@ export default function AdminDashboard() {
         });
     };
 
+    // Функции открытия модалки
+    const openAddModal = () => {
+        setEditingBook(null);
+        setIsModalOpen(true);
+    };
+
+    const openEditModal = (book) => {
+        setEditingBook(book);
+        setIsModalOpen(true);
+    };
+
     return (
         <div className="mb-12 space-y-6">
             <h1 className="text-4xl font-bold text-gray-900 tracking-tight">Инвентарь</h1>
             <div className="space-y-4">
                 <AnimatePresence mode="popLayout">
                     {books.map(book => (
-                        <AdminBookCard key={book.id} book={book} onUpdateQuantity={handleUpdateQuantity} onDelete={handleDelete} />
+                        <AdminBookCard
+                            key={book.id}
+                            book={book}
+                            onUpdateQuantity={handleUpdateQuantity}
+                            onDelete={handleDelete}
+                            onEdit={openEditModal} // Передаем функцию редактирования
+                        />
                     ))}
                 </AnimatePresence>
             </div>
 
             <motion.button
                 whileHover={{ scale: 1.05, y: -2 }} whileTap={{ scale: 0.95 }}
-                onClick={() => setIsModalOpen(true)}
+                onClick={openAddModal}
                 className="fixed bottom-8 right-8 w-16 h-16 bg-blue-600 text-white rounded-full shadow-xl flex items-center justify-center z-40"
             >
                 <Plus size={32} />
@@ -55,9 +73,14 @@ export default function AdminDashboard() {
                 {isModalOpen && (
                     <AddBookModal
                         isOpen={isModalOpen}
-                        onClose={() => setIsModalOpen(false)}
+                        book={editingBook} // Передаем книгу (или null)
+                        onClose={() => {
+                            setIsModalOpen(false);
+                            setEditingBook(null);
+                        }}
                         onSuccess={() => {
                             setIsModalOpen(false);
+                            setEditingBook(null);
                             fetchBooks();
                         }}
                     />

@@ -1,11 +1,12 @@
 import { motion } from 'framer-motion';
 import { Trash2 } from 'lucide-react';
 
-export default function AdminBookCard({ book, onUpdateQuantity, onDelete }) {
+export default function AdminBookCard({ book, onUpdateQuantity, onDelete, onEdit }) {
     return (
         <motion.div
             layout initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }}
-            className="border border-gray-100 p-5 rounded-2xl bg-white shadow-sm flex flex-col md:flex-row justify-between items-center gap-4 hover:shadow-md transition-shadow"
+            onClick={() => onEdit(book)} // Добавлен клик
+            className="border border-gray-100 p-5 rounded-2xl bg-white shadow-sm flex flex-col md:flex-row justify-between items-center gap-4 hover:shadow-md transition-shadow cursor-pointer" // Добавлен cursor-pointer
         >
             <div className="flex items-center gap-5 flex-1 w-full">
                 <div className="w-16 h-20 bg-gray-50 rounded-lg overflow-hidden border border-gray-100 flex-shrink-0">
@@ -22,7 +23,8 @@ export default function AdminBookCard({ book, onUpdateQuantity, onDelete }) {
                 </div>
             </div>
 
-            <div className="flex items-center gap-6">
+            {/* Останавливаем всплытие клика, чтобы модалка не открывалась при удалении/изменении количества */}
+            <div className="flex items-center gap-6" onClick={(e) => e.stopPropagation()}>
                 <div className="flex items-center gap-3 bg-gray-50 p-1 rounded-xl border border-gray-100">
                     <button onClick={() => onUpdateQuantity(book.id, book.quantity, -1)} className="w-8 h-8 rounded-lg bg-white shadow-sm hover:bg-gray-100">-</button>
                     <span className="w-8 text-center font-bold text-gray-700">{book.quantity}</span>
