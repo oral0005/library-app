@@ -7,7 +7,6 @@ export default function BookModal({ book, user, onClose, onBook }) {
     return (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto relative">
-                {/* Кнопка закрытия */}
                 <button
                     onClick={onClose}
                     className="absolute top-4 right-4 text-gray-500 hover:text-black text-2xl"
@@ -18,16 +17,16 @@ export default function BookModal({ book, user, onClose, onBook }) {
                 <div className="p-6">
                     <div className="flex flex-col md:flex-row gap-6">
                         {/* Обложка */}
-                        <div className="w-full md:w-40 shrink-0">
+                        <div className="w-full md:w-40 shrink-0 h-56 rounded-lg overflow-hidden shadow-md bg-gray-50">
                             {book.image_url ? (
                                 <img
                                     src={book.image_url}
                                     alt={book.title}
-                                    className="w-full h-56 object-cover rounded-lg shadow-md"
+                                    className="w-full h-full object-cover"
                                 />
                             ) : (
-                                <div className="w-full h-56 bg-gray-200 rounded-lg flex items-center justify-center text-gray-400">
-                                    Нет обложки
+                                <div className="flex h-full w-full items-center justify-center bg-gray-100 text-sm font-bold text-gray-400 uppercase text-center p-2">
+                                    Мұқаба жоқ
                                 </div>
                             )}
                         </div>
@@ -35,8 +34,8 @@ export default function BookModal({ book, user, onClose, onBook }) {
                         {/* Инфо */}
                         <div className="flex-1">
                             <h2 className="text-2xl font-bold text-gray-900 leading-tight">{book.title}</h2>
-                            <p className="text-lg text-blue-600 font-medium mb-2">{book.author}</p>
-                            <div className="inline-block bg-gray-100 px-2 py-1 rounded text-sm text-gray-600 mb-4">
+                            <p className="text-lg text-gray-600 font-medium mb-2">{book.author}</p>
+                            <div className="inline-block py-1 text-xs text-gray-400 mt-1">
                                 Год издания: {book.year || 'Не указан'}
                             </div>
 

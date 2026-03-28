@@ -1,7 +1,6 @@
 import { LoaderCircle } from "lucide-react";
 
 export default function Button({ text, loading = false, disabled, children, ...props }) {
-    // Поддержка как text="Войти", так и <Button>Войти</Button>
     const content = text || children;
 
     return (

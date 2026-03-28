@@ -13,7 +13,6 @@ export async function POST(req) {
             const token = signToken({ id: user.id, role: user.role, email: user.email });
             const res = NextResponse.json({ message: 'Logged in', role: user.role });
 
-            // Важно установить path: '/', чтобы кука работала везде
             res.cookies.set('token', token, {
                 httpOnly: true,
                 path: '/',

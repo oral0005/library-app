@@ -13,8 +13,8 @@ export default function HistoryPage() {
     }, []);
 
     return (
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-            <h1 className="text-3xl font-extrabold text-gray-900 mb-8 tracking-tight flex items-center gap-3">
+        <div className="bg-white p-6 mb-12 space-y-6 rounded-2xl shadow-sm border border-gray-100">
+            <h1 className="text-4xl font-bold text-gray-900 tracking-tigh flex items-center gap-3">
                 <HistoryIcon className="text-blue-500"/>История бронирований
             </h1>
 

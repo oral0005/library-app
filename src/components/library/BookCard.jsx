@@ -13,8 +13,8 @@ export default function BookCard({ book, onClick }) {
                         className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
                     />
                 ) : (
-                    <div className="flex h-full w-full items-center justify-center text-[10px] italic text-gray-300">
-                        No Cover
+                    <div className="flex h-full w-full items-center justify-center bg-gray-100 text-[10px] font-bold text-gray-400 uppercase text-center p-1 leading-tight">
+                        Мұқаба жоқ
                     </div>
                 )}
             </div>
@@ -26,8 +26,8 @@ export default function BookCard({ book, onClick }) {
                         {book.title}
                     </h3>
                     <p className="text-sm font-medium text-gray-500 mb-1">{book.author}</p>
-                    <span className="inline-block text-xs font-bold text-gray-400 border border-gray-100 px-2 py-0.5 rounded-lg bg-gray-50">
-                        {book.year}
+                    <span className="inline-block text-xs text-gray-400 py-0.5 ">
+                        Год издания: {book.year || 'Не указан'}
                     </span>
                 </div>
 

@@ -31,7 +31,7 @@ export default function Register() {
     };
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-gray-50 -mt-8">
+        <div className="flex min-h-screen items-center justify-center  -mt-8">
             <div className="w-full max-w-md rounded-xl bg-white p-8 shadow-sm border border-gray-100">
                 <h2 className="mb-8 text-center text-2xl font-semibold text-gray-800">Регистрация</h2>
 

@@ -30,14 +30,12 @@ export async function POST(req) {
     try {
         const data = await req.formData();
 
-        // Извлекаем текстовые поля из FormData
         const title = data.get('title');
         const author = data.get('author');
         const description = data.get('description');
         const year = data.get('year');
         const quantity = data.get('quantity');
 
-        // Работа с файлом
         const file = data.get('image');
         let image_url = '';
 
@@ -45,11 +43,9 @@ export async function POST(req) {
             const bytes = await file.arrayBuffer();
             const buffer = Buffer.from(bytes);
 
-            // Создаем уникальное имя файла
             const fileName = `${Date.now()}-${file.name}`;
             const uploadDir = path.join(process.cwd(), 'public/uploads');
 
-            // Проверяем наличие папки, если нет — создаем
             try {
                 await fs.access(uploadDir);
             } catch {

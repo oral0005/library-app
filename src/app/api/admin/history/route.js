@@ -2,7 +2,6 @@ import db from '@/lib/db';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-    // JOIN для объединения данных пользователя, книги и статуса
     const query = `
     SELECT bk.id, bk.booking_date, bk.status, u.email as user_email, b.title as book_title
     FROM bookings bk

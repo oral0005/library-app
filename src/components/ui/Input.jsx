@@ -27,7 +27,6 @@ export default function Input({
                     value={value}
                     onChange={onChange}
                     disabled={disabled}
-                    // Если есть иконка - делаем отступ слева больше (pl-10), если нет - обычный (px-4)
                     className={`w-full rounded-lg border border-[#D0D5DD] px-4 py-2.5 ${
                         icon ? 'pl-10' : ''
                     } text-gray-700 placeholder:text-[#667085] focus:border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all ${
